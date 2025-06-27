@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID:-1000}   # Pass your host UID at build time so files have correct ownership
+        USERNAME: dev
+    volumes:
+      # Mount project so code changes are visible inside container
+      - .:/home/dev/workspace
+      # Persist personal SSH keys & git config in separate named volumes
+      - ssh-personal:/home/dev/.ssh
+      - gitconfig:/home/dev/.config/git
+    environment:
+      # Tell git to use the config stored in the mounted volume
+      - GIT_CONFIG_GLOBAL=/home/dev/.config/git/config
+    tty: true        # Keep STDIN open for interactive shells
+    stdin_open: true # Allow attaching to the container
+
+volumes:
+  ssh-personal:
+  gitconfig: 
