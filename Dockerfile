@@ -11,8 +11,13 @@ RUN apt-get update \
 
 # ---------- Create unprivileged user -----------
 ARG USERNAME=dev
-ARG UID=1000
-RUN useradd -m -s /bin/bash -u $UID $USERNAME
+ARG HOST_UID=1001
+# If UID already exists, fallback to available UID
+RUN if id -u $USERNAME >/dev/null 2>&1; then \
+      echo "User $USERNAME already exists"; \
+    else \
+      useradd -m -s /bin/bash -u $HOST_UID $USERNAME; \
+    fi
 
 # Copy entrypoint script that will fix permissions of mounted volumes then exec as dev
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh

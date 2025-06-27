@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        UID: ${UID:-1000}   # Pass your host UID at build time so files have correct ownership
+        HOST_UID: ${HOST_UID:-1001}
         USERNAME: dev
     volumes:
       # Mount project so code changes are visible inside container
