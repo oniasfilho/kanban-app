@@ -1,15 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { expect } from "@storybook/jest";
 import { Checkbox, CheckboxProps } from "./Checkbox";
+import { withThemedTemplate } from "../../storybook/withThemedTemplate";
+
+const Template = withThemedTemplate(Checkbox);
 
 const meta: Meta<CheckboxProps> = {
   title: "Components/Checkbox",
   component: Checkbox,
+  render: Template,
   argTypes: {
     onChange: { action: "changed" },
   },
   args: {
     label: "Subtask",
+    ...(Template.args as Partial<CheckboxProps>),
   },
 };
 
@@ -19,7 +24,6 @@ type Story = StoryObj<CheckboxProps>;
 
 export const Idle: Story = {
   args: {
-    checked: false,
     disabled: false,
   },
   play: async ({ canvasElement }) => {
@@ -37,7 +41,8 @@ export const Idle: Story = {
 
 export const Completed: Story = {
   args: {
-    checked: true,
     disabled: true,
+    checked: true,
+    theme: "light",
   },
 };

@@ -13,7 +13,7 @@ export function withThemedTemplate<P extends { theme?: "light" | "dark" }>(
         margin: 0,
         inset: 0,
         background:
-          theme === "dark" ? "var(--color-gray-900)" : "var(--color-gray-50)",
+          theme === "dark" ? "var(--color-gray-800)" : "var(--color-white)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -21,7 +21,6 @@ export function withThemedTemplate<P extends { theme?: "light" | "dark" }>(
         boxSizing: "border-box",
       }}
     >
-      {/* @ts-ignore */}
       <Component {...(args as P)} theme={theme} />
     </div>
   );
@@ -31,4 +30,4 @@ export function withThemedTemplate<P extends { theme?: "light" | "dark" }>(
   } as AnyProps;
 
   return Template as unknown as StoryFn<P & { theme?: "light" | "dark" }>;
-} 
+}

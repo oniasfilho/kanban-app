@@ -4,18 +4,16 @@ import { forwardRef } from "react";
 
 export interface TextfieldProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  /** Error message. When provided, component will display error style. */
-  error?: string;
-  /** Force theme regardless of system preference */
+  error?: boolean;
   theme?: "light" | "dark";
 }
 
 export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>(
-  ({ className, error, theme, ...rest }, ref) => {
+  ({ className, error = false, theme, ...rest }, ref) => {
     return (
       <div
         className={clsx(styles.container, className, {
-          [styles.error]: !!error,
+          [styles.error]: error,
           [styles[theme ?? ""]]: !!theme,
         })}
       >
@@ -23,13 +21,13 @@ export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>(
           ref={ref}
           type="text"
           className={styles.input}
-          aria-invalid={!!error}
+          aria-invalid={error}
           {...rest}
         />
-        {error && <span className={styles.errorMessage}>{error}</span>}
+        {error && <span className={styles.errorMessage}>Can't be empty</span>}
       </div>
     );
   }
 );
 
-Textfield.displayName = "Textfield"; 
+Textfield.displayName = "Textfield";

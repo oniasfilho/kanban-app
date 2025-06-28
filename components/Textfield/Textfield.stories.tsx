@@ -1,25 +1,29 @@
-import type { Meta, StoryObj } from "@storybook/nextjs";
+import type { Meta, StoryObj, StoryFn } from "@storybook/nextjs";
 import { Textfield, TextfieldProps } from "./Textfield";
 import { withThemedTemplate } from "../../storybook/withThemedTemplate";
 
 const Template = withThemedTemplate(Textfield);
 
-const meta: Meta = {
+const Render: StoryFn<TextfieldProps> = (props) => <Template {...props} />;
+
+const meta: Meta<TextfieldProps> = {
   title: "Components/Textfield",
-  render: Template,
   component: Textfield,
+  render: Render,
   argTypes: {
     onChange: { action: "changed" },
+    error: { control: "boolean", name: "Error" },
   },
   args: {
     placeholder: "Enter task name",
-    ...(Template.args as Partial<TextfieldProps>),
+    error: false,
+    ...(Template.args as TextfieldProps),
   },
 };
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<TextfieldProps>;
 
 export const Idle: Story = {};
 
@@ -31,7 +35,6 @@ export const Active: Story = {
 
 export const Error: Story = {
   args: {
-    error: "Can't be empty",
-    placeholder: "Enter task name",
+    error: true,
   },
 };

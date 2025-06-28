@@ -18,10 +18,10 @@ describe("Textfield", () => {
   });
 
   it("applies error style and shows message", () => {
-    render(<Textfield error="Error msg" />);
+    render(<Textfield error />);
     const input = screen.getByRole("textbox");
-    const errorMsg = screen.getByText(/error msg/i);
+    const star = screen.getByText("*");
+    expect(star).toBeInTheDocument();
     expect(input).toHaveAttribute("aria-invalid", "true");
-    expect(errorMsg).toBeInTheDocument();
   });
 }); 

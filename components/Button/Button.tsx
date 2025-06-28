@@ -9,6 +9,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  theme?: "light" | "dark";
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

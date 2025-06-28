@@ -1,15 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { expect } from "@storybook/jest";
 import { Button, ButtonProps } from "./Button";
+import { withThemedTemplate } from "../../storybook/withThemedTemplate";
+
+// Cast to any to satisfy generic since Button does not declare `theme` prop
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Template = withThemedTemplate<any>(Button as any);
 
 const meta: Meta<ButtonProps> = {
   title: "Components/Button",
   component: Button,
+  render: Template,
   argTypes: {
     onClick: { action: "clicked" },
   },
   args: {
     children: "Button",
+    ...(Template.args as Partial<ButtonProps>),
   },
 };
 
