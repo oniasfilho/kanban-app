@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Button, ButtonProps } from "./Button";
-const { expect } = await import("@storybook/jest");
+import { expect } from "@storybook/jest"
 
 const meta: Meta<ButtonProps> = {
   title: "Components/Button",
