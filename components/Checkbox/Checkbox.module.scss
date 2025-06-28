@@ -1,0 +1,154 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-family-sans);
+    user-select: none;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    transition: background 0.2s ease;
+
+    &:hover:not(.disabled):not(.light) {
+        background: var(--color-gray-700-bg);
+        color: var(--color-white);
+    }
+
+    &.disabled,
+    &[aria-disabled="true"] {
+        cursor: not-allowed;
+        opacity: 0.25;
+    }
+
+    &.light {
+        background-color: var(--color-gray-50);
+        color: var(--color-gray-900);
+
+        &:hover:not(.disabled) {
+            background: var(--color-purple-700-bg);
+
+            .box {
+                border-color: var(--color-white);
+            }
+        }
+
+        .box {
+            border-color: var(--color-gray-300);
+            background: var(--color-white);
+        }
+    }
+
+    &.dark {
+        background-color: var(--color-gray-900);
+        color: var(--color-gray-50);
+
+        &:hover:not(.disabled) {
+            color: var(--color-white);
+
+            .box {
+                border-color: var(--color-white);
+            }
+
+            .label {
+                color: var(--color-white);
+            }
+        }
+
+        .box {
+            border-color: var(--color-gray-700);
+            background: var(--color-gray-800);
+        }
+
+        .label {
+            color: var(--color-gray-50);
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--color-gray-900);
+    }
+
+    .container:hover:not(.disabled):not(.light) {
+        background: var(--color-purple-700-bg);
+
+        .label {
+            color: var(--color-white);
+        }
+
+        .box {
+            border-color: var(--color-white);
+        }
+    }
+
+    .box {
+        border-color: var(--color-gray-700);
+        background: var(--color-gray-800);
+    }
+}
+
+/* Visually hide the native checkbox but keep it accessible */
+.hiddenInput {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Custom checkbox square */
+.box {
+    width: 1.25rem; /* 20px */
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--color-gray-300);
+    background: var(--color-white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* Tick mark using pseudo element */
+.box::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.25rem;
+    border: solid transparent;
+    border-width: 0 0 2px 2px;
+    transform: rotate(-45deg);
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+/* Checked state */
+.hiddenInput:checked + .box {
+    background: var(--color-purple-700);
+    border-color: var(--color-purple-700);
+}
+
+.hiddenInput:checked + .box::after {
+    border-color: var(--color-white);
+    opacity: 1;
+}
+
+.label {
+    font-size: var(--font-size-heading-s);
+}
+
+/* Completed state example (when disabled & checked) */
+.hiddenInput:checked:disabled + .box {
+    background: var(--color-purple-700);
+    border-color: var(--color-purple-700);
+    opacity: 0.25;
+}
+
+.hiddenInput:checked:disabled + .box::after {
+    opacity: 0.25;
+}
+
+.hiddenInput:checked:disabled ~ .label {
+    text-decoration: line-through;
+    color: var(--color-gray-400);
+}

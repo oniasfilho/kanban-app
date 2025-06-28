@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
+import { expect } from "@storybook/jest";
 import { Button, ButtonProps } from "./Button";
-import { expect } from "@storybook/jest"
 
 const meta: Meta<ButtonProps> = {
   title: "Components/Button",
@@ -25,7 +25,6 @@ export const PrimaryLarge: Story = {
   },
   play: async ({ canvasElement }) => {
     const { within, userEvent } = await import("@storybook/testing-library");
-
     const canvas = within(canvasElement);
     const button = canvas.getByRole("button");
 

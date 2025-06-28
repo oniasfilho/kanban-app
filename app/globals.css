@@ -1,6 +1,7 @@
 :root {
   /* --- Colors--- */
   --color-purple-700: #635fc7;
+  --color-purple-700-bg: #625fc720;
   --color-purple-500: #a8a4ff;
 
   --color-black: #000112;
@@ -23,19 +24,19 @@
   --font-weight-bold: 700;
   --font-weight-medium: 500;
 
-  --font-size-heading-xl: 24px; 
+  --font-size-heading-xl: 24px;
   --line-height-heading-xl: 30px;
 
-  --font-size-heading-l: 18px; 
+  --font-size-heading-l: 18px;
   --line-height-heading-l: 23px;
 
-  --font-size-heading-m: 15px; 
+  --font-size-heading-m: 15px;
   --line-height-heading-m: 19px;
 
-  --font-size-heading-s: 12px; 
+  --font-size-heading-s: 12px;
   --line-height-heading-s: 15px;
 
-  --font-size-body-l: 13px; 
+  --font-size-body-l: 13px;
   --line-height-body-l: 23px;
 
   --font-size-body-m: 12px;
@@ -87,4 +88,28 @@ a {
   pointer-events: none;
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.dark-section,
+.light-section {
+  width: 100%;
+  height: 50%;
+}
+
+.light-section {
+  background-color: white;
 }
