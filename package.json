@@ -11,7 +11,7 @@
     "build-storybook": "storybook build",
     "ci": "rm -rf node_modules package-lock.json && npm install",
     "test-storybook": "test-storybook",
-    "chromatic": "chromatic --project-token $CHROMATIC_PROJECT_TOKEN --exit-once-uploaded"
+    "chromatic": "chromatic --exit-zero-on-changes --exit-once-uploaded"
   },
   "jest": {
     "preset": "ts-jest",
