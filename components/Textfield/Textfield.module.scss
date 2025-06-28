@@ -1,0 +1,83 @@
+.container {
+  position: relative;
+  width: 100%;
+
+  &.light {
+    .input {
+      border-color: var(--color-gray-300);
+      color: var(--color-gray-900);
+
+      &::placeholder {
+        color: var(--color-gray-500);
+      }
+
+      &:focus {
+        border-color: var(--color-purple-700);
+      }
+    }
+  }
+
+  &.dark {
+    .input {
+      border-color: var(--color-gray-700);
+      color: var(--color-gray-50);
+
+      &::placeholder {
+        color: var(--color-gray-500);
+      }
+
+      &:focus {
+        border-color: var(--color-purple-700);
+      }
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 0.875rem 1rem; // similar to design
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body-l);
+  color: var(--foreground);
+  background: transparent;
+  border: 1px solid var(--color-gray-700);
+  border-radius: 0.25rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--color-gray-500);
+  }
+
+  &:focus {
+    border-color: var(--color-purple-700);
+  }
+}
+
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+  .input {
+    border-color: var(--color-gray-300);
+
+    &:focus {
+      border-color: var(--color-purple-700);
+    }
+  }
+}
+
+/* Error state */
+.error .input {
+  border-color: var(--color-red-500);
+  padding-right: 6.5rem; /* space for error message */
+}
+
+.errorMessage {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-red-500);
+  pointer-events: none;
+} 
