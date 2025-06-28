@@ -22,6 +22,17 @@ export const PrimaryLarge: Story = {
     size: "l",
     disabled: false,
   },
+  play: async ({ canvasElement }) => {
+    const { within, userEvent } = await import("@storybook/testing-library");
+    const { expect } = await import("@storybook/jest");
+
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button");
+
+    await userEvent.click(button);
+
+    expect(button).toBeInTheDocument();
+  },
 };
 
 export const PrimarySmall: Story = {

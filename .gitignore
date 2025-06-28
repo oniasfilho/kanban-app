@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Storybook
+storybook-static/
+debug-storybook.log
+*.test-results.json
+# Playwright (Storybook test-runner)
+.playwright/*
