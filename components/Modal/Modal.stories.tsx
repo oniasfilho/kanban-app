@@ -30,11 +30,10 @@ const meta: Meta<ModalProps> = {
     },
   },
   args: {
-    open: false,
     size: "m",
     theme: "light",
     showClose: true,
-  },
+  } as unknown as Partial<ModalProps>,
 };
 
 export default meta;
@@ -42,37 +41,42 @@ export default meta;
 type Story = StoryObj<ModalProps>;
 
 export const Playground: Story = {
-  render: (initialArgs) => {
+  render: () => {
     const [args, updateArgs] = useArgs();
 
-    const Themed = withThemedTemplate(({ theme, ...rest }: { theme?: "light" | "dark" } & Partial<ModalProps>) => (
-      <>
-        <Button onClick={() => updateArgs({ open: true })}>Open modal</Button>
-        <Modal
-          {...args}
-          {...(rest as ModalProps)}
-          theme={theme}
-          open={args.open}
-          onClose={() => updateArgs({ open: false })}
-        >
-          <Modal.Header>Manage board</Modal.Header>
-          <Modal.Body>
-            <p style={{ marginBottom: "1rem" }}>
-              This is the body of the modal. Put any content here.
-            </p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => updateArgs({ open: false })}
-            >
-              Close
-            </Button>
-            <Button>Save</Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    ));
+    const Themed = withThemedTemplate(
+      ({
+        theme,
+        ...rest
+      }: { theme?: "light" | "dark" } & Partial<ModalProps>) => (
+        <>
+          <Button onClick={() => updateArgs({ open: true })}>Open modal</Button>
+          <Modal
+            {...args}
+            {...(rest as ModalProps)}
+            theme={theme}
+            open={args.open}
+            onClose={() => updateArgs({ open: false })}
+          >
+            <Modal.Header>Manage board</Modal.Header>
+            <Modal.Body>
+              <p style={{ marginBottom: "1rem" }}>
+                This is the body of the modal. Put any content here.
+              </p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => updateArgs({ open: false })}
+              >
+                Close
+              </Button>
+              <Button>Save</Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      )
+    );
 
     return <Themed {...args} />;
   },

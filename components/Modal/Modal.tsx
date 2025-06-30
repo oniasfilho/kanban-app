@@ -18,11 +18,11 @@ export interface ModalBaseProps {
   theme?: "light" | "dark";
 }
 
-export type ModalProps<P = {}> = P &
+export type ModalProps<P = Record<string, never>> = P &
   Omit<ComponentPropsWithoutRef<"dialog">, keyof ModalBaseProps> &
   ModalBaseProps;
 
-function ModalInner<P = {}>({
+function ModalInner<P = Record<string, never>>({
   open,
   onClose,
   children,
@@ -91,7 +91,7 @@ function ModalInner<P = {}>({
   );
 }
 
-export function Modal<P = {}>(props: ModalProps<P>) {
+export function Modal<P = Record<string, never>>(props: ModalProps<P>) {
   if (typeof window === "undefined") return null;
   return createPortal(<ModalInner {...props} />, document.body);
 }
