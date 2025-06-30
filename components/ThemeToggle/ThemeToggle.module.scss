@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  background-color: var(--color-gray-50);
+  transition: background 0.2s ease;
+
+  &.dark {
+    background-color: var(--color-gray-900);
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Visually hidden native checkbox */
+.hiddenInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Switch track */
+.switch {
+  position: relative;
+  width: 5rem; /* 80px roughly */
+  height: 2.5rem; /* 40px roughly */
+  border-radius: 9999px;
+  background: var(--color-purple-700);
+  flex-shrink: 0;
+
+  /* Knob */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 2rem; /* 32px */
+    height: 2rem;
+    border-radius: 9999px;
+    background: var(--color-white);
+    transition: transform 0.2s ease;
+  }
+}
+
+/* Move knob when checked */
+.hiddenInput:checked + .switch::before {
+  transform: translateX(2.5rem); /* track width minus knob width minus padding */
+}
+
+/* Dark container overrides */
+.dark {
+  .icon {
+    filter: brightness(0.8);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .container:not(.light) {
+    background-color: var(--color-gray-900);
+
+    .icon {
+      filter: brightness(0.8);
+    }
+  }
+} 
