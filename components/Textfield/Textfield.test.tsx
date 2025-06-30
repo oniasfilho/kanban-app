@@ -20,7 +20,7 @@ describe("Textfield", () => {
   it("applies error style and shows message", () => {
     render(<Textfield error />);
     const input = screen.getByRole("textbox");
-    const star = screen.getByText("*");
+    const star = screen.getByText("Can't be empty");
     expect(star).toBeInTheDocument();
     expect(input).toHaveAttribute("aria-invalid", "true");
   });
