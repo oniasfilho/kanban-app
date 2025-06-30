@@ -24,7 +24,7 @@ export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>(
           aria-invalid={error}
           {...rest}
         />
-        {error && <span className={styles.errorMessage}>Can't be empty</span>}
+        {error && <span className={styles.errorMessage}>Can&apos;t be empty</span>}
       </div>
     );
   }

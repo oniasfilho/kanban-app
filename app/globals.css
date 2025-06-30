@@ -9,7 +9,7 @@
   --color-gray-900: #20212c;
   --color-gray-800: #2b2c37;
   --color-gray-700: #3e3f4e;
-  --color-gray-500: #828fa3;
+  --color-gray-500: #828fa33e;
   --color-gray-100: #e4ebfa;
   --color-gray-50: #f4f7fd;
 
@@ -65,6 +65,24 @@ body {
   font-family: var(--font-family-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  li {
+    list-style-type: none;
+  }
 }
 
 * {

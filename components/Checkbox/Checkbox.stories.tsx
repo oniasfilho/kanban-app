@@ -1,3 +1,4 @@
+import { useArgs } from "@storybook/client-api";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { expect } from "@storybook/jest";
 import { Checkbox, CheckboxProps } from "./Checkbox";
@@ -8,12 +9,21 @@ const Template = withThemedTemplate(Checkbox);
 const meta: Meta<CheckboxProps> = {
   title: "Components/Checkbox",
   component: Checkbox,
-  render: Template,
   argTypes: {
     onChange: { action: "changed" },
+    checked: {
+      control: "boolean",
+      description: "Whether the checkbox is checked",
+    },
+    label: {
+      control: "text",
+      description: "Label for the checkbox",
+    },
   },
   args: {
     label: "Subtask",
+    checked: false,
+    disabled: false,
     ...(Template.args as Partial<CheckboxProps>),
   },
 };
@@ -23,8 +33,19 @@ export default meta;
 type Story = StoryObj<CheckboxProps>;
 
 export const Idle: Story = {
-  args: {
-    disabled: false,
+  render: (initialArgs) => {
+    const [args, updateArgs] = useArgs();
+    const Themed = withThemedTemplate(Checkbox);
+
+    return (
+      <Themed
+        {...args}
+        onChange={(event) => {
+          updateArgs({ checked: event.target.checked });
+          initialArgs.onChange?.(event); // trigger action logger
+        }}
+      />
+    );
   },
   play: async ({ canvasElement }) => {
     const { within, userEvent } = await import("@storybook/testing-library");
@@ -45,4 +66,5 @@ export const Completed: Story = {
     checked: true,
     theme: "light",
   },
+  render: Template,
 };

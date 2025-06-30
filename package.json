@@ -33,6 +33,7 @@
     }
   },
   "dependencies": {
+    "@storybook/client-api": "^7.6.17",
     "@types/react": "^18.3.23",
     "classnames": "^2.5.1",
     "next": "15.3.4",

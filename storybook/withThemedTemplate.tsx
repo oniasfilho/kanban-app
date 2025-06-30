@@ -21,7 +21,9 @@ export function withThemedTemplate<P extends { theme?: "light" | "dark" }>(
         boxSizing: "border-box",
       }}
     >
-      <Component {...(args as P)} theme={theme} />
+      <div style={{ width: "20rem", display: "flex", justifyContent: "center" }}>
+        <Component {...(args as P)} theme={theme} />
+      </div>
     </div>
   );
 

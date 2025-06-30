@@ -47,3 +47,4 @@ build-storybook.log
 *.test-results.json
 # Playwright (Storybook test-runner)
 .playwright/*
+.context

@@ -1,22 +1,26 @@
+import { useArgs } from "@storybook/client-api";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { expect } from "@storybook/jest";
 import { Button, ButtonProps } from "./Button";
 import { withThemedTemplate } from "../../storybook/withThemedTemplate";
-
-// Cast to any to satisfy generic since Button does not declare `theme` prop
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Template = withThemedTemplate<any>(Button as any);
+import React from "react";
 
 const meta: Meta<ButtonProps> = {
   title: "Components/Button",
   component: Button,
-  render: Template,
   argTypes: {
     onClick: { action: "clicked" },
+    children: {
+      control: "text",
+      description: "Button label",
+    },
   },
   args: {
-    children: "Button",
-    ...(Template.args as Partial<ButtonProps>),
+    children: "Click me!",
+    theme: "light",
+    variant: "primary",
+    size: "l",
+    disabled: false,
   },
 };
 
@@ -25,10 +29,19 @@ export default meta;
 type Story = StoryObj<ButtonProps>;
 
 export const PrimaryLarge: Story = {
-  args: {
-    variant: "primary",
-    size: "l",
-    disabled: false,
+  render: (initialArgs) => {
+    const [args, updateArgs] = useArgs();
+    const Themed = withThemedTemplate(Button);
+
+    return (
+      <Themed
+        {...args}
+        onClick={() => {
+          updateArgs({ children: "Clicked!" });
+          initialArgs.onClick?.({} as React.MouseEvent<HTMLButtonElement>);
+        }}
+      />
+    );
   },
   play: async ({ canvasElement }) => {
     const { within, userEvent } = await import("@storybook/testing-library");
@@ -38,37 +51,5 @@ export const PrimaryLarge: Story = {
     await userEvent.click(button);
 
     expect(button).toBeInTheDocument();
-  },
-};
-
-export const PrimarySmall: Story = {
-  args: {
-    variant: "primary",
-    size: "s",
-    disabled: false,
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    variant: "secondary",
-    size: "l",
-    disabled: false,
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: "destructive",
-    size: "l",
-    disabled: false,
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    variant: "primary",
-    size: "l",
-    disabled: true,
   },
 };
