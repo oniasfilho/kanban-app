@@ -6,8 +6,8 @@ describe("ThemeToggle", () => {
   it("renders icons", () => {
     render(<ThemeToggle checked={false} />);
 
-    const lightIcon = screen.getByRole("img", { hidden: true, name: /light theme/i });
-    const darkIcon = screen.getByRole("img", { hidden: true, name: /dark theme/i });
+    const lightIcon = screen.getByAltText(/light theme/i);
+    const darkIcon = screen.getByAltText(/dark theme/i);
 
     expect(lightIcon).toBeInTheDocument();
     expect(darkIcon).toBeInTheDocument();

@@ -2,8 +2,6 @@ import clsx from "classnames";
 import styles from "./ThemeToggle.module.scss";
 import { forwardRef } from "react";
 import Image from "next/image";
-import lightThemeIcon from "@/assets/icons/icon-light-theme.svg";
-import darkThemeIcon from "@/assets/icons/icon-dark-theme.svg";
 
 export interface ThemeToggleProps
   extends Omit<
@@ -27,7 +25,7 @@ export const ThemeToggle = forwardRef<HTMLInputElement, ThemeToggleProps>(
         )}
       >
         <Image
-          src={lightThemeIcon}
+          src="/icons/icon-light-theme.svg"
           alt="Light theme"
           className={styles.icon}
           aria-hidden="true"
@@ -48,7 +46,7 @@ export const ThemeToggle = forwardRef<HTMLInputElement, ThemeToggleProps>(
         <span className={styles.switch} aria-hidden="true" />
 
         <Image
-          src={darkThemeIcon}
+          src="/icons/icon-dark-theme.svg"
           alt="Dark theme"
           className={styles.icon}
           aria-hidden="true"
